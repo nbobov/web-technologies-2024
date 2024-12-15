@@ -9,3 +9,80 @@
 .test {
     color: red !important;
 }
+
+.paragraph {
+    font-size: 16px;
+    line-height: 26px;
+    color: #1F3F68;
+}
+
+.title {
+    font-size: 64px;
+    color: #1F3F68;
+}
+
+.header-two {
+    font-weight: 500;
+    font-size: 44px;
+    text-align: center;
+}
+
+.header-three {
+    font-size: 36px;
+    text-align: center;
+}
+
+.header-four {
+    font-size: 20px;
+    line-height: 30px;
+    color: #1F3F68;
+}
+
+.form-input {
+    border: 1px solid #356EAD;
+    box-sizing: border-box;
+    border-radius: 10px;
+    opacity: 0.4;
+}
+
+.submit-form-button {
+    background: linear-gradient(to right, #4B76E6, #8C55E9);
+    box-shadow: 5px 20px 50px rgba(16, 112, 177, 0.2);
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 26px;
+    text-align: center;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    border: none;
+    padding: 5px 20px;
+}
+
+form {
+    background-image: url('../img/form-bg.jpg');
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 40px 20px;
+}
+
+header ul {
+    overflow: hidden;
+    padding: 0;
+    background: linear-gradient(to top, #4C7F8D, #F3F6F6 );
+}
+
+header ul li {
+    list-style: none;
+    position: relative;
+    display: inline-block;
+    border-radius: 0px 32px 32px 0;
+    padding: 16px;
+    box-shadow: -2px 0 2px #FFFFFF inset, 2px 0 2px #000000;
+}
+
+header ul li a {
+    text-decoration: none;
+    color: #000000;
+}
