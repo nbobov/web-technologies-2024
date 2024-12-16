@@ -48,3 +48,24 @@
     font-weight: 400;
     font-style: italic;
 }
+
+@font-face {
+    font-family: "SF Pro Text";
+    src: local('SF Pro Text'), local('SF Subhead Semibold'),
+    url("../../../static/fonts/SFProText-Semibold.ttf") format("truetype");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "SF Pro Text";
+    src: local('SF Pro Text'), local('SF Subhead Medium'),
+    url("../../../static/fonts/SFProText-Medium.ttf") format("truetype");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "SF Pro Text";
+    src: local('SF Pro Text'), local('SF Subhead Regular'),
+    url("../../../static/fonts/SFProText-Regular.ttf") format("truetype");
+    font-weight: 400;
+}
