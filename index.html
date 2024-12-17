@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="src/assets/styles/style.css" rel="stylesheet">
+    <link href="src/assets/styles/style_scss.css" rel="stylesheet">
     <title>IT WEBSITE</title>
 </head>
 <body>
@@ -155,17 +155,36 @@
 <main>
     <section class="service">
         <div class="container service__container">
-            <div class="screenshots__container">
-                <img src="src/assets/img/review-details.jpg" alt="Screenshot of review details">
-                <img src="src/assets/img/new-chat.jpg" alt="Screenshot of new chat">
-                <img src="src/assets/img/comment-to-review.jpg" alt="Screenshot of comments">
-                <img src="src/assets/img/main-page-org.jpg" alt="Screenshot of main page">
-                <img src="src/assets/img/messages.jpg" alt="Screenshot of messages">
-                <img src="src/assets/img/settings.jpg" alt="Screenshot of settings">
-            </div>
             <svg class="watermark" width="727" height="560">
                 <use href="#watermark"></use>
             </svg>
+            <div class="screenshots__container">
+                <div class="screenshots__container__inner">
+                    <div class="screenshots__container__inner__images">
+                        <img src="src/assets/img/review-details.jpg" alt="Screenshot of review details">
+                        <img class="focus-photo" src="src/assets/img/comment-to-review.jpg"
+                             alt="Screenshot of comments">
+                        <img src="src/assets/img/messages.jpg" alt="Screenshot of messages">
+                    </div>
+                    <div class="screenshots__container__inner__images">
+                        <img src="src/assets/img/review-details.jpg" alt="Screenshot of review details">
+                        <img class="focus-photo" src="src/assets/img/comment-to-review.jpg" alt="Screenshot of comments">
+                        <img src="src/assets/img/messages.jpg" alt="Screenshot of messages">
+                    </div>
+                </div>
+                <div class="screenshots__container__inner">
+                    <div class="screenshots__container__inner__images">
+                        <img src="src/assets/img/new-chat.jpg" alt="Screenshot of new chat">
+                        <img src="src/assets/img/main-page-org.jpg" alt="Screenshot of main page">
+                        <img src="src/assets/img/settings.jpg" alt="Screenshot of settings">
+                    </div>
+                    <div class="screenshots__container__inner__images">
+                        <img src="src/assets/img/new-chat.jpg" alt="Screenshot of new chat">
+                        <img src="src/assets/img/main-page-org.jpg" alt="Screenshot of main page">
+                        <img src="src/assets/img/settings.jpg" alt="Screenshot of settings">
+                    </div>
+                </div>
+            </div>
             <div class="service__description">
                 <h2 class="bold">Development of <span class="bold blue">mobile applications</span> and <span
                         class="bold blue">web
