@@ -1,1 +1,42 @@
-hello world from Nikita
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформление заказа</title>
+    <link rel="stylesheet" href="src/assets/styles/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Оформление заказа</h1>
+
+        <div class="pizza-builder">
+            <div class="section">
+                <h2>Пицца</h2>
+                <div class="pizza-options" id="pizza-types">
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Размер</h2>
+                <div class="size-options" id="pizza-sizes">
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Добавить по вкусу</h2>
+                <div class="topping-options" id="pizza-toppings">
+                </div>
+            </div>
+
+            <div class="cart-section">
+                <button id="add-to-cart" class="add-to-cart-btn">
+                    Добавить в корзину: <span id="total-price">0</span> ₽ | <span id="total-calories">0</span> ккал
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="src/index.js"></script>
+</body>
+</html>

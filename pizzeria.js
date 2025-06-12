@@ -6,8 +6,8 @@ class Pizza {
     };
 
     static SIZES = {
-        'Большая': { price: 200, calories: 200 },
-        'Маленькая': { price: 100, calories: 100 }
+        'Маленькая': { price: 100, calories: 100 },
+        'Большая': { price: 200, calories: 200 }
     };
 
     static TOPPINGS = {
@@ -66,6 +66,8 @@ class Pizza {
         return calories;
     }
 }
+
+export { Pizza };
 
 // Пример использования
 
