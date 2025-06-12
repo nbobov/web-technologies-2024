@@ -1,15 +1,7 @@
 <?php
-// Подключение к базе данных
 require_once 'config.php';
 
-/**
- * Рекурсивная функция для получения иерархического меню
- * @param PDO $pdo Объект подключения к БД
- * @param int|null $parentId ID родительского элемента
- * @return array Массив с элементами меню
- */
 function getMenuItems($pdo, $parentId = null) {
-    // Получаем данные из БД
     $stmt = $pdo->prepare("SELECT id, name FROM menu_items WHERE parent_id " .
                          ($parentId === null ? "IS NULL" : "= :parentId") .
                          " ORDER BY id");
@@ -36,11 +28,6 @@ function getMenuItems($pdo, $parentId = null) {
     return $items;
 }
 
-/**
- * Функция для серверного рендеринга меню в HTML
- * @param array $menuItem Элемент меню для рендеринга
- * @return string HTML-код элемента меню
- */
 function renderMenuItem($menuItem) {
     $hasChildren = $menuItem['hasChildren'];
     $itemsHtml = '';
@@ -73,7 +60,6 @@ function renderMenuItem($menuItem) {
     return $html;
 }
 
-// Получаем структуру меню
 if (isset($pdo)) {
     try {
         $menuData = getMenuItems($pdo);
@@ -96,7 +82,7 @@ if (isset($pdo)) {
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Меню из базы данных</title>
+    <title>Меню из БД</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -112,7 +98,6 @@ if (isset($pdo)) {
 
     <?php if (!isset($errorMessage)): ?>
     <script>
-        // Передаем данные из PHP в JavaScript для отладки
         const menuData = <?php echo $menuDataJson; ?>;
     </script>
     <script src="script.js"></script>
