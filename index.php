@@ -1,80 +1,18 @@
 <?php
-require_once 'config.php';
+$host = 'localhost';
+$dbname = 'product_catalog';
+$username = 'root';
+$password = '';
 
-function getMenuItems($pdo, $parentId = null) {
-    $stmt = $pdo->prepare("SELECT id, name FROM menu_items WHERE parent_id " .
-                         ($parentId === null ? "IS NULL" : "= :parentId") .
-                         " ORDER BY id");
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    if ($parentId !== null) {
-        $stmt->bindParam(':parentId', $parentId, PDO::PARAM_INT);
-    }
-
-    $stmt->execute();
-    $items = [];
-
-    while ($row = $stmt->fetch()) {
-        $childItems = getMenuItems($pdo, $row['id']);
-        $hasChildren = !empty($childItems);
-
-        $items[] = [
-            'id' => $row['id'],
-            'name' => $row['name'],
-            'hasChildren' => $hasChildren,
-            'items' => $childItems
-        ];
-    }
-
-    return $items;
-}
-
-function renderMenuItem($menuItem) {
-    $hasChildren = $menuItem['hasChildren'];
-    $itemsHtml = '';
-
-    if ($hasChildren) {
-        $itemsHtml = '<div class="list-item__items">';
-        foreach ($menuItem['items'] as $childItem) {
-            $itemsHtml .= renderMenuItem($childItem);
-        }
-        $itemsHtml .= '</div>';
-    }
-
-    $html = '<div class="list-item" data-parent data-id="' . $menuItem['id'] . '">';
-    $html .= '<div class="list-item__inner">';
-
-    if ($hasChildren) {
-        $html .= '<img class="list-item__arrow" src="img/chevron-down.png" alt="arrow" data-open>';
-    }
-
-    $html .= '<img class="list-item__folder" src="img/folder.png" alt="' . ($hasChildren ? 'folder' : 'file') . '">';
-    $html .= '<span>' . htmlspecialchars($menuItem['name']) . '</span>';
-    $html .= '</div>';
-
-    if ($hasChildren) {
-        $html .= $itemsHtml;
-    }
-
-    $html .= '</div>';
-
-    return $html;
-}
-
-if (isset($pdo)) {
-    try {
-        $menuData = getMenuItems($pdo);
-        $menuRoot = !empty($menuData) ? $menuData[0] : [
-            'id' => 0,
-            'name' => 'Каталог товаров',
-            'hasChildren' => false,
-            'items' => []
-        ];
-        $menuDataJson = json_encode($menuRoot, JSON_UNESCAPED_UNICODE);
-    } catch (Exception $e) {
-        $errorMessage = "Ошибка при получении данных из БД: " . $e->getMessage();
-    }
-} else {
-    $errorMessage = "Нет соединения с базой данных. Настройте подключение в файле config.php";
+    $stmt = $pdo->query('SELECT * FROM products ORDER BY id DESC');
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch(PDOException $e) {
+    echo "Ошибка подключения к БД: " . $e->getMessage();
+    die();
 }
 ?>
 
@@ -82,25 +20,26 @@ if (isset($pdo)) {
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Меню из БД</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог товаров</title>
+    <link rel="stylesheet" href="catalog_style.css">
 </head>
 <body>
-    <div class="list-items" id="list-items">
-        <?php
-        if (isset($errorMessage)) {
-            echo '<div class="error-message">' . htmlspecialchars($errorMessage) . '</div>';
-        } else {
-            echo renderMenuItem($menuRoot);
-        }
-        ?>
-    </div>
+    <div class="container">
+        <h1>Каталог товаров</h1>
 
-    <?php if (!isset($errorMessage)): ?>
-    <script>
-        const menuData = <?php echo $menuDataJson; ?>;
-    </script>
-    <script src="script.js"></script>
-    <?php endif; ?>
+        <div class="products">
+            <?php foreach ($products as $product): ?>
+                <div class="product-card" onclick="location.href='product.php?id=<?php echo $product['id']; ?>'">
+                    <img src="<?php echo $product['image_path']; ?>" alt="<?php echo $product['name']; ?>" class="product-image">
+                    <div class="product-info">
+                        <h2 class="product-name"><?php echo $product['name']; ?></h2>
+                        <div class="product-price"><?php echo number_format($product['price'], 0, ',', ' '); ?> ₽</div>
+                        <p class="product-description"><?php echo $product['description']; ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
 </body>
 </html>
