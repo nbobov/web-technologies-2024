@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Просмотр поста</title>
+    <link rel="stylesheet" href="src/assets/styles/global.css">
+    <link rel="stylesheet" href="src/assets/styles/post.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Просмотр поста</h1>
+            <a href="catalog.html" class="back-link">Вернуться к списку</a>
+        </header>
+
+        <main>
+            <div id="post-container">
+                <div id="post-loading" class="loading">Загрузка поста...</div>
+                <div id="post-error" class="error" style="display: none;"></div>
+                <div id="post-content" style="display: none;">
+                    <h2 id="post-title"></h2>
+                    <div id="post-body"></div>
+                    <div id="post-author"></div>
+                </div>
+            </div>
+
+            <div id="comments-section">
+                <h3>Комментарии</h3>
+                <div id="comments-loading" class="loading">Загрузка комментариев...</div>
+                <div id="comments-error" class="error" style="display: none;"></div>
+                <ul id="comments-list" style="display: none;"></ul>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="posts.js"></script>
+</body>
+</html>
+

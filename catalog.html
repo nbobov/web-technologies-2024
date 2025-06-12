@@ -5,26 +5,34 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Каталог постов</title>
+    <link rel="stylesheet" href="src/assets/styles/global.css">
     <link rel="stylesheet" href="/src/assets/styles/style.css">
+    <link rel="stylesheet" href="/src/assets/styles/catalog.css">
+    <link rel="stylesheet" href="/src/assets/styles/post.css">
 </head>
 <body>
+    <div class="container">
+        <header class="page-header">
+            <h1>Каталог постов</h1>
+        </header>
 
-<section
-    id="catalog" 
-    class="catalog"
->
-    <div 
-        class="catalog__items"
-        data-catalog-items
-    ></div>
+        <section
+            id="catalog"
+            class="catalog"
+        >
+            <div
+                class="catalog__items"
+                data-catalog-items
+            ></div>
 
-    <div 
-        class="catalog__pagination"
-        data-catalog-pagination
-    ></div>
-</section>
+            <div
+                class="catalog__pagination"
+                data-catalog-pagination
+            ></div>
+        </section>
+    </div>
 
-<script src="catalog.js" type="module"></script>
+    <script src="catalog.js" type="module"></script>
 </body>
 </html>

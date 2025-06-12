@@ -71,21 +71,24 @@ export class Catalog {
         window.history.pushState({}, '', url)
     }
 
-    loadItems () {
+    async loadItems () {
         try {
-            this.#getItems({ limit: this.limit, page: this.#page })
-                .then(({ items, total }) => {
-                    this.#total = total
-                    this.renderItems(items)
-                    this.renderPagination()
-        })
+            const { items, total } = await this.#getItems({ limit: this.limit, page: this.#page });
+            this.#total = total;
+            this.renderItems(items);
+            this.renderPagination();
         } catch (error) {
-            console.log(error);
+            console.error('Ошибка при загрузке элементов:', error);
+            this.renderError('Не удалось загрузить данные. Пожалуйста, попробуйте позже.');
         }
     }
 
     renderItems (items) {
         this.#itemsEl.innerHTML = items.map(this.#renderItem).join('')
+    }
+
+    renderError (message) {
+        this.#itemsEl.innerHTML = `<div class="catalog-error">${message}</div>`;
     }
 
     renderPagination () {

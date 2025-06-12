@@ -2,26 +2,39 @@ import { Catalog } from "./src/components/catalog.js"
 
 const renderPostItem = item => `
     <a  
-        href="posts/${item.id}"
+        href="posts.html?id=${item.id}"
         class="post-item"
     >
-        <span class="post-item__title">
+        <h3 class="post-item__title">
             ${item.title}
-        </span>
+        </h3>
 
-        <span class="post-item__body">
+        <p class="post-item__body">
             ${item.body}
-        </span>
+        </p>
+        
+        <div class="post-item__footer">
+            <span class="post-item__read-more">Читать подробнее</span>
+            <span class="post-item__id">ID: ${item.id}</span>
+        </div>
     </a>
 `
 
-const getPostItems = ({ limit, page }) => {
-    return fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}&_page=${page}`)
-        .then(async res => {
-            const total = +res.headers.get('x-total-count')
-            const items = await res.json()
-            return { items, total }
-        })
+const getPostItems = async ({ limit, page }) => {
+    try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${limit}&_page=${page}`);
+
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP: ${response.status}`);
+        }
+
+        const total = +response.headers.get('x-total-count')
+        const items = await response.json()
+        return { items, total }
+    } catch (error) {
+        console.error('Ошибка при получении данных:', error);
+        throw error;
+    }
 }
 
 const renderPhotoItem = item => `
@@ -40,13 +53,21 @@ const renderPhotoItem = item => `
     </a>
 `
 
-const getPhotoItems = ({ limit, page }) => {
-    return fetch(`https://jsonplaceholder.typicode.com/photos?_limit=${limit}&_page=${page}`)
-        .then(async res => {
-            const total = +res.headers.get('x-total-count')
-            const items = await res.json()
-            return { items, total }
-        })
+const getPhotoItems = async ({ limit, page }) => {
+    try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/photos?_limit=${limit}&_page=${page}`);
+
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP: ${response.status}`);
+        }
+
+        const total = +response.headers.get('x-total-count');
+        const items = await response.json();
+        return { items, total };
+    } catch (error) {
+        console.error('Ошибка при получении фотографий:', error);
+        throw error;
+    }
 }
 
 const init = () => {
